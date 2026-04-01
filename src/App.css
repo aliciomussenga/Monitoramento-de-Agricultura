@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Isso resolve o problema dos ícones que estão desalinhados */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove margens padrão que o navegador coloca */
+body {
+  margin: 0;
+  padding: 0;
+}
