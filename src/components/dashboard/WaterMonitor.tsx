@@ -15,9 +15,9 @@ export const WaterMonitor: React.FC<WaterMonitorProps> = ({ volume, percent }) =
   ">
     <div className="flex justify-between items-start mb-6">
       <h2 className="text-xl font-bold flex items-center gap-2">
-        <Droplets className="w-5 h-5 text-blue-400" /> 3. Água e Irrigação [cite: 22]
+        <Droplets className="w-5 h-5 text-blue-400" />Água e Irrigação
       </h2>
-      <Badge variant="blue">Recursos [cite: 75]</Badge>
+      <Badge variant="blue">Recursos</Badge>
     </div>
     <div className="space-y-5">
       <div className="flex justify-between items-end">
