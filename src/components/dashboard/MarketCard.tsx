@@ -16,7 +16,7 @@ export const MarketCard: React.FC = () => {
         <h2 className="text-xl font-bold flex items-center gap-2 text-[#F3F4F6]">
           <TrendingUp className="w-5 h-5 text-[#F59E0B]" />Economia e Mercado
         </h2>
-        <Badge variant="amber">Economia</Badge>
+        <Badge variant="amber">Economico</Badge>
       </div>
 
       <div className="grid grid-cols-1 gap-3 mb-6">

@@ -94,14 +94,14 @@ const MonitorAgro: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-500">
             {/* CORREÇÃO AQUI: Passando agronomicsData para a prop data */}
             <AgroCard
-              title="1. Agronómicos"
+              title="Agronómicos"
               icon={<FlaskConical className="w-5 h-5 text-cyan-400" />}
               data={agronomicsData}
               badgeText="Produção"
               variant="aqua"
             />
             <LivestockCard />
-            <SustainabilityCard />
+      
           </div>
         )}
 
@@ -110,7 +110,7 @@ const MonitorAgro: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-500">
             {/* CORREÇÃO AQUI: Passando climateData para a prop data */}
             <AgroCard
-              title="2. Climáticos"
+              title="Climáticos"
               icon={<Sun className="w-5 h-5 text-amber-400" />}
               data={climateData}
               badgeText="Recursos"
@@ -170,8 +170,7 @@ const MonitorAgro: React.FC = () => {
             {/* Parâmetros Sociais (Agricultores, Jovens, Mulheres) */}
             <SocialCard />
 
-            {/* Gestão de Projecto (Resultados e Satisfação) */}
-            <ProjectManagementCard />
+
 
             {/* NOVO: Card de Monitorização ADECOS (Extensão Rural) */}
             <section className="bg-[#13192B] p-6 rounded-3xl border border-white/5 transition-all duration-500 hover:border-blue-500/40 hover:shadow-[0_30px_50px_-15px_rgba(37,99,235,0.3)]">
@@ -179,7 +178,7 @@ const MonitorAgro: React.FC = () => {
                 <h2 className="text-xl font-bold flex items-center gap-2 text-[#F3F4F6]">
                   <Users className="w-5 h-5 text-purple-400" /> Rede ADECOS
                 </h2>
-                <Badge variant="purple">Extensão</Badge>
+                <Badge variant="purple">Pessoas</Badge>
               </div>
 
               <div className="space-y-4">
