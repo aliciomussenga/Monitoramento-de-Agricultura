@@ -12,7 +12,6 @@ import {
 
 // Importação dos Componentes
 import { Header } from "./dashboard/Header";
-import { StatCard } from "./dashboard/StatCard";
 import { Badge } from "./shared/Badge";
 import { AgroCard } from "./dashboard/AgroCard";
 import { WaterMonitor } from "./dashboard/WaterMonitor";
@@ -21,6 +20,7 @@ import { MarketCard } from "./dashboard/MarketCard";
 import { SocialCard } from "./dashboard/SocialCard";
 import { SustainabilityCard } from "./dashboard/SustainabilityCard";
 import { ProjectManagementCard } from "./dashboard/ProjectManagementCard";
+import {SystemIntegration} from "./dashboard/SystemIntegration";
 
 const MonitorAgro: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
@@ -170,7 +170,8 @@ const MonitorAgro: React.FC = () => {
             {/* Parâmetros Sociais (Agricultores, Jovens, Mulheres) */}
             <SocialCard />
 
-
+            {/* Card de Integração Estratégica (Ecossistema Digital) */}
+            <SystemIntegration />
 
             {/* NOVO: Card de Monitorização ADECOS (Extensão Rural) */}
             <section className="bg-[#13192B] p-6 rounded-3xl border border-white/5 transition-all duration-500 hover:border-blue-500/40 hover:shadow-[0_30px_50px_-15px_rgba(37,99,235,0.3)]">
@@ -225,7 +226,7 @@ const MonitorAgro: React.FC = () => {
       </main>
 
       <footer className="max-w-7xl mx-auto mt-12 italic">
-        <p className="text-center text-[10px] text-[#8A91A5]/30 tracking-[0.4em] uppercase font-bold">
+        <p className="text-center text-[10px] text-[#8A91A5]/60 tracking-[0.4em] uppercase font-bold">
           Instituto de Desenvolvimento Agrário · Angola 2026
         </p>
       </footer>
