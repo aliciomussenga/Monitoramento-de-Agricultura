@@ -21,6 +21,8 @@ import { SocialCard } from "./dashboard/SocialCard";
 import { SustainabilityCard } from "./dashboard/SustainabilityCard";
 import { ProjectManagementCard } from "./dashboard/ProjectManagementCard";
 import {SystemIntegration} from "./dashboard/SystemIntegration";
+import {DynamicMap} from "./dashboard/DynamicMap";
+import {RealMap} from "./dashboard/RealMap";
 
 const MonitorAgro: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
@@ -105,21 +107,30 @@ const MonitorAgro: React.FC = () => {
           </div>
         )}
 
-        {/* VIEW: RECURSOS */}
-        {activeTab === "recursos" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-500">
-            {/* CORREÇÃO AQUI: Passando climateData para a prop data */}
-            <AgroCard
-              title="Climáticos"
-              icon={<Sun className="w-5 h-5 text-amber-400" />}
-              data={climateData}
-              badgeText="Recursos"
-              variant="amber"
-            />
-            <WaterMonitor volume={450} percent={88.2} />
-            <SustainabilityCard />
-          </div>
-        )}
+          {/* VIEW: RECURSOS */}
+    {activeTab === 'recursos' && (
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    
+    {/* MAPA REAL (OCUPANDO 2 COLUNAS) */}
+    <RealMap />
+
+    {/* MONITOR DE ÁGUA E CLIMA LADO A LADO NO MOBILE / COLUNA 3 NO DESKTOP */}
+    <div className="space-y-6">
+      <WaterMonitor volume={450} percent={88.2} />
+      <AgroCard 
+        title="2. Clima e Solo" 
+        icon={<Sun className="w-5 h-5 text-amber-400" />} 
+        data={climateData} 
+        badgeText="Recursos" 
+        variant="amber" 
+      />
+    </div>
+
+    <div className="lg:col-span-3">
+       <SustainabilityCard />
+    </div>
+  </div>
+)}
 
         {/* VIEW: ECONOMIA (Custos, Rendimentos e Mercado) */}
         {activeTab === "economia" && (

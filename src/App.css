@@ -13,3 +13,20 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Customização para manter o Leaflet elegante no tema Dark */
+.leaflet-container {
+    background: #0B101D !important;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #13192B !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    background: #13192B !important;
+    color: #8A91A5 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
