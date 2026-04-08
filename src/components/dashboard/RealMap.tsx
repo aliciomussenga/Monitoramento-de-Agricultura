@@ -1,14 +1,21 @@
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Badge } from '../shared/Badge';
 import { 
-  Globe, Sun, Droplets, Thermometer, 
-  Wind, Navigation, Waves, Layers 
+  Globe, Sun, Waves, Layers 
 } from 'lucide-react';
 
-// Função para criar Marcadores Dinâmicos de Alta Visibilidade
+// --- CONFIGURATION ---
+const MAPTILER_KEY = 'b5Y3XqesqBabfFXkxCIR';
+
+// Angola Geographic Constants
+const ANGOLA_CENTER: [number, number] = [-11.2027, 17.8739];
+const ANGOLA_BOUNDS: L.LatLngBoundsExpression = [
+  [-18.042, 11.640], // Southwest
+  [-4.373, 24.082]   // Northeast
+];
+
 const createTechIcon = (color: string) => {
   return L.divIcon({
     className: 'custom-div-icon',
@@ -24,7 +31,6 @@ const createTechIcon = (color: string) => {
   });
 };
 
-// Dados Simulados baseados nos requisitos do IDA/Multitel
 const monitoringPoints = [
   { 
     id: 1, 
@@ -51,29 +57,35 @@ const monitoringPoints = [
 ];
 
 export const RealMap: React.FC = () => {
-  const centerPos: [number, number] = [-12.500, 15.500];
-
   return (
-    <section className="bg-[#0D0D0D] p-0 rounded-[2rem] border border-[#4F0259]/30 lg:col-span-2 min-h-[650px] flex flex-col relative overflow-hidden shadow-2xl transition-all hover:border-[#A305A6]/40">
+    <section className="bg-[#0D0D0D] p-0 rounded-[2rem] border border-[#4F0259]/30 lg:col-span-2 min-h-[650px] flex flex-col relative overflow-hidden shadow-2xl">
       
       {/* HEADER SIG */}
       <div className="absolute top-6 left-6 right-6 z-[1000] flex flex-col md:flex-row justify-between gap-4 pointer-events-none">
-        <div className="bg-[#0D0D0D]/90 backdrop-blur-xl p-4 rounded-xl border border-[#4F0259]/50 flex items-center gap-4 pointer-events-auto">
+        <div className="bg-[#0D0D0D]/90 backdrop-blur-xl p-4 rounded-xl border border-[#4F0259]/50 flex items-center gap-4 pointer-events-auto shadow-2xl">
           <div className="p-2 bg-[#4F0259]/20 rounded-lg border border-[#A305A6]/30 text-[#A305A6]">
             <Globe className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-sm font-bold text-white uppercase tracking-widest">Monitoramento Multi-Parâmetro</h2>
+            <h2 className="text-sm font-bold text-white uppercase tracking-widest">Monitoramento Nacional - Angola</h2>
             <p className="text-[10px] text-gray-400 font-mono italic">Dados de Telemetria em Tempo Real</p>
           </div>
         </div>
       </div>
 
       <div className="flex-1 z-0">
-        <MapContainer center={centerPos} zoom={6} zoomControl={false} className="h-full w-full">
+        <MapContainer 
+          center={ANGOLA_CENTER} 
+          zoom={6} 
+          minZoom={5}
+          maxBounds={ANGOLA_BOUNDS}
+          maxBoundsViscosity={1.0}
+          zoomControl={false} 
+          className="h-full w-full"
+        >
           <TileLayer 
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; IDA'
+            url={`https://api.maptiler.com/maps/hybrid-v4/{z}/{x}/{y}.jpg?key=${MAPTILER_KEY}`}
+            attribution='&copy; IDA / MapTiler'
           />
 
           {monitoringPoints.map((point) => (
@@ -86,33 +98,33 @@ export const RealMap: React.FC = () => {
                   </div>
 
                   <div className="grid grid-cols-1 gap-4">
-                    {/* Seção Clima */}
+                    {/* Clima */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-[#A305A6]">
                         <Sun className="w-3 h-3" />
                         <span className="text-[9px] font-bold uppercase">Clima e Ar</span>
                       </div>
                       <div className="grid grid-cols-3 gap-2 bg-white/5 p-2 rounded-lg text-center">
-                        <div><p className="text-[8px] text-gray-500">TEMP</p><p className="text-[10px] font-bold">{point.data.clima.temp}</p></div>
-                        <div><p className="text-[8px] text-gray-500">HUM</p><p className="text-[10px] font-bold">{point.data.clima.hum}</p></div>
-                        <div><p className="text-[8px] text-gray-500">VENTO</p><p className="text-[10px] font-bold">{point.data.clima.vento}</p></div>
+                        <div><p className="text-[8px] text-gray-500 uppercase">Temp</p><p className="text-[10px] font-bold">{point.data.clima.temp}</p></div>
+                        <div><p className="text-[8px] text-gray-500 uppercase">Hum</p><p className="text-[10px] font-bold">{point.data.clima.hum}</p></div>
+                        <div><p className="text-[8px] text-gray-500 uppercase">Vento</p><p className="text-[10px] font-bold">{point.data.clima.vento}</p></div>
                       </div>
                     </div>
 
-                    {/* Seção Solo */}
+                    {/* Solo */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-amber-500">
                         <Layers className="w-3 h-3" />
-                        <span className="text-[9px] font-bold uppercase">Solo (Sensores IoT)</span>
+                        <span className="text-[9px] font-bold uppercase">Solo (IoT)</span>
                       </div>
                       <div className="grid grid-cols-3 gap-2 bg-white/5 p-2 rounded-lg text-center">
-                        <div><p className="text-[8px] text-gray-500">pH</p><p className="text-[10px] font-bold">{point.data.solo.ph}</p></div>
-                        <div><p className="text-[8px] text-gray-500">SOLO T</p><p className="text-[10px] font-bold">{point.data.solo.temp}</p></div>
-                        <div><p className="text-[8px] text-gray-500">UMID</p><p className="text-[10px] font-bold text-emerald-400">{point.data.solo.umidade}</p></div>
+                        <div><p className="text-[8px] text-gray-500 uppercase">pH</p><p className="text-[10px] font-bold">{point.data.solo.ph}</p></div>
+                        <div><p className="text-[8px] text-gray-500 uppercase">Solo T</p><p className="text-[10px] font-bold">{point.data.solo.temp}</p></div>
+                        <div><p className="text-[8px] text-gray-500 uppercase">Umid</p><p className="text-[10px] font-bold text-emerald-400">{point.data.solo.umidade}</p></div>
                       </div>
                     </div>
 
-                    {/* Seção Irrigação */}
+                    {/* Água */}
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-blue-400">
                         <Waves className="w-3 h-3" />
@@ -136,11 +148,11 @@ export const RealMap: React.FC = () => {
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-[#074E8C]"></div>
-            <span className="text-[8px] text-gray-400 uppercase font-bold">Recursos Hídricos</span>
+            <span className="text-[8px] text-gray-400 uppercase font-bold tracking-wider">Recursos Hídricos</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-[#A305A6]"></div>
-            <span className="text-[8px] text-gray-400 uppercase font-bold">Produção (MOSAP)</span>
+            <span className="text-[8px] text-gray-400 uppercase font-bold tracking-wider">Produção (MOSAP)</span>
           </div>
         </div>
       </div>
